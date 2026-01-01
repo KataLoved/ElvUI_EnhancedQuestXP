@@ -1,0 +1,46 @@
+name: Build and Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+env:
+  ADDON_NAME: ElvUI_EnhancedQuestXP
+
+jobs:
+  build:
+    name: Build Addon
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare addon structure
+        run: |
+          mkdir -p dist/${{ env.ADDON_NAME }}
+          
+          cp -r Config dist/${{ env.ADDON_NAME }}/
+          cp -r Locales dist/${{ env.ADDON_NAME }}/
+          cp -r Settings dist/${{ env.ADDON_NAME }}/
+          cp ${{ env.ADDON_NAME }}.lua dist/${{ env.ADDON_NAME }}/
+          cp ${{ env.ADDON_NAME }}.toc dist/${{ env.ADDON_NAME }}/
+
+      - name: Create ZIP
+        working-directory: dist
+        run: zip -r ../${{ env.ADDON_NAME }}.zip ${{ env.ADDON_NAME }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ADDON_NAME }}
+          path: ${{ env.ADDON_NAME }}.zip
+
+      - name: Upload to Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ env.ADDON_NAME }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

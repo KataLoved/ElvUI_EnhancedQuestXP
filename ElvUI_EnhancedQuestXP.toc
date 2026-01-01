@@ -1,0 +1,11 @@
+## Interface: 30300
+## Author: |cfff50e5fNastyaLove|r
+## Version: 1.00
+## Title: |cff1784d1E|r|cffe5e3e3lvUI|r |cff1784d1E|r|cffe5e3e3nhanced|r |cff1784d1Q|r|cffe5e3e3uest|r |cff1784d1X|r|cffe5e3e3P|r
+## SavedVariables: EnhancedQuestXP
+## RequiredDeps: ElvUI
+
+Locales\Load_Locales.xml
+Settings\Load_Settings.xml
+ElvUI_EnhancedQuestXP.lua
+Config\Load_Config.xml

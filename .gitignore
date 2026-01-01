@@ -1,0 +1,20 @@
+# Build artifacts
+*.zip
+build/
+dist/
+
+# IDE
+.qodo
+.vscode/
+.idea/
+*.sublime-*
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Backup files
+*.bak
+*.backup
+*~
