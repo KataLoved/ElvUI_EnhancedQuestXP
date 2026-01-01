@@ -16,13 +16,13 @@ function EFL:UpdateSettings()
 	if self.db.questXpEnabled then
 		local questMultiplier = self.db.questXpMultiplier or 1
 		local selfMultiplier = self.db.selfXpMultiplier or 0
-		
+	
 		self.totalXpMultiplier = questMultiplier * (1 + selfMultiplier / 100)
 	else
 		self.totalXpMultiplier = 1
 	end
-	
-	self.SetQuestXPMultiplier()
+
+	self:SetQuestXPMultiplier()
 end
 
 function EFL:SetQuestXPMultiplier()

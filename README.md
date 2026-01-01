@@ -41,3 +41,7 @@
 | Включено | `true` |
 | Множитель сервера | `x1` |
 | Бонусный опыт | `0` |
+
+<p align="right">
+	<img src="https://badges.pufler.dev/visits/KataLoved/ArcBrowserStarter?color=black&logo=github"/>
+</p>
