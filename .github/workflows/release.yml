@@ -22,7 +22,9 @@ jobs:
           mkdir -p dist/${{ env.ADDON_NAME }}
           
           cp -r Config dist/${{ env.ADDON_NAME }}/
+          cp -r Core dist/${{ env.ADDON_NAME }}/
           cp -r Locales dist/${{ env.ADDON_NAME }}/
+          cp -r Modules dist/${{ env.ADDON_NAME }}/
           cp -r Settings dist/${{ env.ADDON_NAME }}/
           cp ${{ env.ADDON_NAME }}.lua dist/${{ env.ADDON_NAME }}/
           cp ${{ env.ADDON_NAME }}.toc dist/${{ env.ADDON_NAME }}/
