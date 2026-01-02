@@ -4,6 +4,8 @@
 ## Title: |cff1784d1E|r|cffe5e3e3lvUI|r |cff1784d1E|r|cffe5e3e3nhanced|r |cff1784d1Q|r|cffe5e3e3uest|r |cff1784d1X|r|cffe5e3e3P|r
 ## SavedVariables: EnhancedQuestXP
 ## RequiredDeps: ElvUI
+## X-Sirus-Update: https://github.com/KataLoved/ElvUI_EnhancedQuestXP/tree/master
+## X-Sirus-Category: 17
 
 Locales\Load_Locales.xml
 Settings\Load_Settings.xml

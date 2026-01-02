@@ -7,7 +7,7 @@ function EQX:Initialize()
     EP:RegisterPlugin(addonName, self.InsertOptions)
 
     self.Detection:DetectServerMultiplier()
-    self.Detection:UpdateAll()
+    self.Detection:UpdateAll();
 
     self:RegisterEvent("UNIT_AURA", "OnAuraChange")
     self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED", "OnEquipmentChange")
