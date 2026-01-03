@@ -16,18 +16,30 @@ function EQX:Initialize()
     self:RegisterEvent("PLAYER_ENTERING_WORLD", "OnPlayerEnteringWorld")
     self:RegisterEvent("PLAYER_XP_UPDATE", "OnXPUpdate")
     self:RegisterEvent("QUEST_LOG_UPDATE", "OnQuestLogUpdate")
+    self:RegisterEvent("DISABLE_XP_GAIN", "OnXPGainDisabled")
+    self:RegisterEvent("ENABLE_XP_GAIN", "OnXPGainEnabled")
 
     self:HookDataBars()
+    self:CheckInitialXPStatus()
+end
+
+function EQX:CheckInitialXPStatus()
+    local isDisabled = self.Utils:GetXPDisabledState()
+    if isDisabled then
+        self.Utils:NotifyXPStatus(true, true)
+    end
 end
 
 function EQX:OnAuraChange(event, unit)
     if unit == "player" then
+        if self.Utils:GetXPDisabledState() then return end
         self.Detection:UpdateAll()
         self:ForceUpdateQuestXP()
     end
 end
 
 function EQX:OnEquipmentChange()
+    if self.Utils:GetXPDisabledState() then return end
     self.Detection:DetectFamilyItems()
     self:ForceUpdateQuestXP()
 end
@@ -35,22 +47,40 @@ end
 function EQX:OnPlayerEnteringWorld()
     ---@diagnostic disable-next-line
     C_Timer:After(2, function()
+        local isDisabled = EQX.Utils:GetXPDisabledState()
+        if isDisabled then return end
+
         EQX.Detection:UpdateAll()
         self:ForceUpdateQuestXP()
     end)
 end
 
+function EQX:OnXPGainDisabled()
+    self.Utils.xpDisabledCache = true
+    self.Utils:NotifyXPStatus(true, false)
+    self:ResetQuestXPBar()
+end
+
+function EQX:OnXPGainEnabled()
+    self.Utils.xpDisabledCache = false
+    self.Utils:NotifyXPStatus(false, false)
+    self.Detection:UpdateAll()
+    self:ForceUpdateQuestXP()
+end
+
 function EQX:OnXPUpdate()
+    if self.Utils:GetXPDisabledState() then return end
     self:ForceUpdateQuestXP()
 end
 
 function EQX:OnQuestLogUpdate()
+    if self.Utils:GetXPDisabledState() then return end
     self:ForceUpdateQuestXP()
 end
 
 function EQX:UpdateSettings()
     self.Detection:UpdateAll()
-    
+
     if not E.db.enhanceQuestXP.enabled then
         self:ResetQuestXPBar()
     else
@@ -67,7 +97,8 @@ end
 
 function EQX:ForceUpdateQuestXP()
     if not E.db.enhanceQuestXP.enabled then return end
-	if EQX.Utils.IsMaxLevel("player") then return end
+    if self.Utils.IsMaxLevel("player") then return end
+    if self.Utils:GetXPDisabledState() then return end
 
     local DataBars = E:GetModule("DataBars")
     if DataBars and DataBars.ExperienceBar_QuestXPUpdate then
@@ -87,7 +118,7 @@ function EQX:HookDataBars()
             local multiplier = self.Calculator:GetXPMultiplier()
             mod.questTotalXP = math.floor(mod.questTotalXP * multiplier)
 
-            if mod.expBar and mod.expBar.questBar and mod.expBar.maxExp then
+            if mod.expBar and mod.expBar.questBar and mod.expBar.maxExp and mod.expBar.maxExp > 0 then
                 mod.expBar.questBar:SetMinMaxValues(0, mod.expBar.maxExp)
                 mod.expBar.questBar:SetValue(math.min(mod.expBar.curExp + mod.questTotalXP, mod.expBar.maxExp))
             end

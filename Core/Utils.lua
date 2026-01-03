@@ -10,6 +10,42 @@ function EQX.Utils.IsMaxLevel(player)
 	return UnitLevel(player) >= 80
 end
 
+EQX.Utils.xpDisabledCache = nil
+
+function EQX.Utils.IsXPDisabled()
+	if IsXPUserDisabled then
+		return IsXPUserDisabled()
+	end
+	return false
+end
+
+function EQX.Utils:UpdateXPDisabledState()
+	local wasDisabled = self.xpDisabledCache
+	local isDisabled = self.IsXPDisabled()
+	self.xpDisabledCache = isDisabled
+	return isDisabled, wasDisabled
+end
+
+function EQX.Utils:GetXPDisabledState()
+	if self.xpDisabledCache == nil then
+		self:UpdateXPDisabledState()
+	end
+	return self.xpDisabledCache
+end
+
+function EQX.Utils:NotifyXPStatus(isDisabled, isInitial)
+	local prefix = "|cff1784d1[Enhanced Quest XP]|r "
+
+	if isDisabled then
+		local msg = isInitial and L["XP_DISABLED_DETECTED"] or L["XP_DISABLED_CHANGED"]
+		print(prefix .. "|cffff6666" .. msg .. "|r")
+	else
+		if not isInitial then
+			print(prefix .. "|cff66ff66" .. L["XP_ENABLED_CHANGED"] .. "|r")
+		end
+	end
+end
+
 function EQX.Utils:HasBuffById(unit, searchSpellId)
     local i = 1
     while true do
