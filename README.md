@@ -1,6 +1,6 @@
 # ElvUI Enhanced Quest XP
 
-![Version](https://img.shields.io/badge/version-1.1-blue)
+![Version](https://img.shields.io/badge/version-1.1.2-blue)
 ![Dependency](https://img.shields.io/badge/requires-ElvUI-orange)
 
 Плагин для **ElvUI**, который позволяет настроить отображение опыта за квесты с учётом серверных и персональных бонусов опыта.
