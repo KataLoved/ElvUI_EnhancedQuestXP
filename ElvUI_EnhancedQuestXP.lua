@@ -115,6 +115,7 @@ function EQX:HookDataBars()
 		if EQX.Utils.IsMaxLevel("player") then return end
 
         if mod.questTotalXP and mod.questTotalXP > 0 then
+			local displayedXP = mod.questTotalXP
             local multiplier = self.Calculator:GetXPMultiplier()
             mod.questTotalXP = math.floor(mod.questTotalXP * multiplier)
 
@@ -123,7 +124,7 @@ function EQX:HookDataBars()
                 mod.expBar.questBar:SetValue(math.min(mod.expBar.curExp + mod.questTotalXP, mod.expBar.maxExp))
             end
 
-            self.Utils:Debug("Quest XP updated:", mod.questTotalXP, "| Multiplier:", string.format("%.2f", multiplier))
+            self.Utils:Debug("Quest XP updated:", displayedXP, ">", mod.questTotalXP, "| Multiplier:", string.format("%.2f", multiplier))
         end
     end)
 end
