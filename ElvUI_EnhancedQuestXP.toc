@@ -1,6 +1,6 @@
 ## Interface: 30300
 ## Author: |cfff50e5fNastyaLove|r
-## Version: 1.1
+## Version: 1.1.1
 ## Title: |cff1784d1E|r|cffe5e3e3lvUI|r |cff1784d1E|r|cffe5e3e3nhanced|r |cff1784d1Q|r|cffe5e3e3uest|r |cff1784d1X|r|cffe5e3e3P|r
 ## SavedVariables: EnhancedQuestXP
 ## RequiredDeps: ElvUI
