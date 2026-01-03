@@ -2,6 +2,8 @@ local E, L, V, P, G = unpack(ElvUI)
 local EQX = E:GetModule("EnhancedQuestXP")
 local EP = LibStub("LibElvUIPlugin-1.0")
 
+local C_Timer = _G.C_Timer
+
 local addonName = ...
 function EQX:Initialize()
     EP:RegisterPlugin(addonName, self.InsertOptions)
@@ -31,7 +33,8 @@ function EQX:OnEquipmentChange()
 end
 
 function EQX:OnPlayerEnteringWorld()
-    C_Timer.After(2, function()
+    ---@diagnostic disable-next-line
+    C_Timer:After(2, function()
         self.Detection:UpdateAll()
         self:ForceUpdateQuestXP()
     end)
