@@ -64,6 +64,7 @@ end
 
 function EQX:ForceUpdateQuestXP()
     if not E.db.enhanceQuestXP.enabled then return end
+	if EQX.Utils.IsMaxLevel("player") then return end
 
     local DataBars = E:GetModule("DataBars")
     if DataBars and DataBars.ExperienceBar_QuestXPUpdate then
@@ -77,6 +78,7 @@ function EQX:HookDataBars()
 
     self:SecureHook(DataBars, "ExperienceBar_QuestXPUpdate", function(mod)
         if not E.db.enhanceQuestXP.enabled then return end
+		if EQX.Utils.IsMaxLevel("player") then return end
 
         if mod.questTotalXP and mod.questTotalXP > 0 then
             local multiplier = self.Calculator:GetXPMultiplier()

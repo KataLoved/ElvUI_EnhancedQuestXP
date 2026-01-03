@@ -6,6 +6,10 @@ function EQX.Utils:ColorizeText(text, color)
     return format("|cff%s%s|r", color, text)
 end
 
+function EQX.Utils.IsMaxLevel(player)
+	return UnitLevel(player) >= 80
+end
+
 function EQX.Utils:HasBuffById(unit, searchSpellId)
     local i = 1
     while true do
