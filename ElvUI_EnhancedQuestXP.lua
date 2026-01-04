@@ -110,21 +110,32 @@ function EQX:HookDataBars()
     local DataBars = E:GetModule("DataBars")
     if not DataBars then return end
 
+    self.questXPCache = { modified = nil }
+
     self:SecureHook(DataBars, "ExperienceBar_QuestXPUpdate", function(mod)
         if not E.db.enhanceQuestXP.enabled then return end
-		if EQX.Utils.IsMaxLevel("player") then return end
+        if EQX.Utils.IsMaxLevel("player") then return end
 
         if mod.questTotalXP and mod.questTotalXP > 0 then
-			local displayedXP = mod.questTotalXP
+            if self.questXPCache.modified and mod.questTotalXP == self.questXPCache.modified then
+                return
+            end
+
+            local originalXP = mod.questTotalXP
             local multiplier = self.Calculator:GetXPMultiplier()
-            mod.questTotalXP = math.floor(mod.questTotalXP * multiplier)
+            local modifiedXP = math.floor(originalXP * multiplier)
+
+            self.questXPCache.modified = modifiedXP
+            mod.questTotalXP = modifiedXP
 
             if mod.expBar and mod.expBar.questBar and mod.expBar.maxExp and mod.expBar.maxExp > 0 then
                 mod.expBar.questBar:SetMinMaxValues(0, mod.expBar.maxExp)
                 mod.expBar.questBar:SetValue(math.min(mod.expBar.curExp + mod.questTotalXP, mod.expBar.maxExp))
             end
 
-            self.Utils:Debug("Quest XP updated:", displayedXP, ">", mod.questTotalXP, "| Multiplier:", string.format("%.2f", multiplier))
+            self.Utils:Debug("Quest XP updated:", originalXP, ">", mod.questTotalXP, "| Multiplier:", string.format("%.2f", multiplier))
+        else
+            self.questXPCache.modified = nil
         end
     end)
 end
