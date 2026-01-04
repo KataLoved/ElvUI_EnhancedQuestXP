@@ -1,6 +1,11 @@
 local E, L, V, P, G = unpack(ElvUI)
 local EQX = E:GetModule("EnhancedQuestXP")
 
+---@diagnostic disable
+local UnitBuff = UnitBuff
+local UnitDebuff = UnitDebuff
+---@diagnostic enable
+
 function EQX.Utils:ColorizeText(text, color)
     color = color or "ff8000"
     return format("|cff%s%s|r", color, text)
