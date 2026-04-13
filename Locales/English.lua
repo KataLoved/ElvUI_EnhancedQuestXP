@@ -29,3 +29,7 @@ L["STATUS_NO_BONUSES"] = "No active bonuses detected"
 
 L["DEBUG_MODE"] = "Debug Mode"
 L["DEBUG_MODE_DESC"] = "Show debug messages in chat"
+
+L["XP_DISABLED_DETECTED"] = "XP gain is disabled. Quest XP bar adjustments suspended."
+L["XP_DISABLED_CHANGED"] = "XP gain has been disabled. Quest XP bar adjustments suspended."
+L["XP_ENABLED_CHANGED"] = "XP gain has been enabled. Quest XP bar adjustments resumed."
