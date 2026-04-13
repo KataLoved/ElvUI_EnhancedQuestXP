@@ -35,7 +35,7 @@ end
 function EQX:OnPlayerEnteringWorld()
     ---@diagnostic disable-next-line
     C_Timer:After(2, function()
-        self.Detection:UpdateAll()
+        EQX.Detection:UpdateAll()
         self:ForceUpdateQuestXP()
     end)
 end

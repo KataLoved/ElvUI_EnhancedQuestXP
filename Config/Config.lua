@@ -57,7 +57,7 @@ function EQX:InsertOptions()
                         type = "range",
                         name = L["SERVER_MULTIPLIER_MANUAL"],
                         desc = L["SERVER_MULTIPLIER_MANUAL_DESC"],
-                        min = 1, max = 5, step = 1,
+                        min = 1, max = 10, step = 1,
                         disabled = function() return E.db.enhanceQuestXP.serverMultiplierAuto end,
                     },
                     serverDetected = {
