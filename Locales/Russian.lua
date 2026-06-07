@@ -20,6 +20,7 @@ L["BONUS_TRACKING_ENABLED_DESC"] = "Автоматически определя�
 
 L["STATUS_PREMIUM"] = "Премиум +%d%%"
 L["STATUS_CHRISTMAS"] = "Праздник +%d%%"
+L["STATUS_WEEKEND"] = "Выходные +%d%%"
 L["STATUS_POTION"] = "Зелье +%d%%"
 L["STATUS_FAMILY"] = "Фамильные +%d%% (%d предм.)"
 

@@ -2,6 +2,7 @@ local E, L, V, P, G = unpack(ElvUI)
 local EQX = E:GetModule("EnhancedQuestXP")
 
 EQX.Constants.Buffs = {
+	Weekend = 371931,
     Christmas = 311168,
 }
 
@@ -66,5 +67,6 @@ EQX.Constants.Patterns = {
 EQX.Constants.Defaults = {
     ServerMultiplier = 1,
     ChristmasBonus = 0,
+	WeekendBonus = 0,
     PotionBonus = 0,
 }
