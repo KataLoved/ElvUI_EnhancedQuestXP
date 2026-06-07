@@ -20,6 +20,7 @@ L["BONUS_TRACKING_ENABLED_DESC"] = "Automatically detect and apply all XP bonuse
 
 L["STATUS_PREMIUM"] = "Premium +%d%%"
 L["STATUS_CHRISTMAS"] = "Holiday +%d%%"
+L["STATUS_WEEKEND"] = "Weekend +%d%%"
 L["STATUS_POTION"] = "Potion +%d%%"
 L["STATUS_FAMILY"] = "Heirlooms +%d%% (%d items)"
 
